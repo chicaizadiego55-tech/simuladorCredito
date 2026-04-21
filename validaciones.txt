@@ -1,0 +1,90 @@
+SPROMPT 1 — Validaciones básicas por campo (onblur)
+----------------------------------------------------------
+Tengo un formulario HTML de simulador de crédito con los siguientes ids de inputs:
+txtIngresos, txtArriendo, txtAlimentacion, txtVarios, txtMonto, txtPlazo, txtTasaInteres.
+ 
+Quiero validar cada input con las siguientes reglas generales:
+- No puede estar vacío
+- Solo se permiten números (enteros o decimales positivos)
+- Máximo 5 dígitos en la parte entera
+ 
+Condiciones técnicas:
+- No usar alert(), mostrar el mensaje debajo de cada input
+- El mensaje de error debe aparecer en color rojo y en cursiva
+- Usar los ids existentes sin modificarlos
+- Usar el evento onblur para validar cuando el usuario sale del input
+- Crear dinámicamente un span de error debajo de cada campo
+ 
+----------------------------------------------------------
+PROMPT 2 — Validaciones de negocio con montos y rangos
+----------------------------------------------------------
+Agrega validaciones de negocio específicas para cada campo del simulador de crédito.
+Las reglas son:
+ 
+txtIngresos:
+- Obligatorio
+- Solo números positivos
+- Mínimo: USD 100
+- Máximo: USD 99.999
+ 
+txtArriendo:
+- Obligatorio (ingresar 0 si no aplica)
+- Solo números positivos
+- Máximo: USD 9.999
+ 
+txtAlimentacion:
+- Obligatorio (ingresar 0 si no aplica)
+- Solo números positivos
+- Máximo: USD 9.999
+ 
+txtVarios:
+- Obligatorio (ingresar 0 si no aplica)
+- Solo números positivos
+- Máximo: USD 9.999
+ 
+Validación cruzada:
+- El total de egresos (arriendo + alimentación + varios) no puede ser igual
+  ni mayor a los ingresos, porque el disponible quedaría en cero o negativo.
+ 
+txtMonto:
+- Obligatorio
+- Solo números positivos
+- Mínimo: USD 500
+- Máximo: USD 50.000
+ 
+txtPlazo:
+- Obligatorio
+- Solo números enteros (sin decimales)
+- Mínimo: 1 año
+- Máximo: 20 años
+ 
+txtTasaInteres:
+- Obligatorio
+- Solo números positivos (permite decimales)
+- Mínimo: 1%
+- Máximo: 30%
+ 
+----------------------------------------------------------
+PROMPT 3 — Ejecutar validaciones al presionar el botón Calcular
+----------------------------------------------------------
+Modifica el comportamiento del botón con id btnCalcularCredito para que:
+1. Primero ejecute todas las validaciones del formulario
+2. Solo si todas las validaciones pasan sin errores, ejecute la función calcular()
+3. Si hay errores, NO ejecute calcular() y muestre todos los mensajes de error
+   debajo de cada campo correspondiente al mismo tiempo
+4. Limpiar todos los mensajes de error al inicio de cada validación nueva
+5. No usar alert() en ningún momento
+6. Los mensajes deben aparecer en rojo e itálica debajo de cada input
+ 
+----------------------------------------------------------
+PROMPT 4 — Condiciones técnicas generales
+----------------------------------------------------------
+Para todas las validaciones anteriores, aplicar estas condiciones técnicas:
+- Usar los ids existentes: txtIngresos, txtArriendo, txtAlimentacion,
+  txtVarios, txtMonto, txtPlazo, txtTasaInteres
+- No modificar el HTML ni los ids existentes
+- Crear dinámicamente los elementos span de error con JavaScript
+- Reutilizar el span si ya existe (no crear duplicados)
+- Agregar el código al archivo simulador.js sin tocar funciones.js
+- El estilo del error debe ser: color rojo, fuente itálica, tamaño 0.8rem
+- El span de error debe tener id = idDelInput + "_error"
