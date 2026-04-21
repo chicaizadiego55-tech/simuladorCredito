@@ -79,3 +79,70 @@ function reiniciar() {
 // Conectar botones
 document.getElementById("btnCalcularCredito").addEventListener("click", calcular);
 document.getElementById("btnReiniciar").addEventListener("click", reiniciar);
+
+// ── VALIDACIONES ──
+
+function crearMensajeError(inputId) {
+    var idMensaje = inputId + "_error";
+    var existing = document.getElementById(idMensaje);
+    if (existing) return existing;
+
+    var span = document.createElement("span");
+    span.id = idMensaje;
+    span.style.color = "red";
+    span.style.fontStyle = "italic";
+    span.style.fontSize = "0.8rem";
+    span.style.display = "block";
+    span.style.marginTop = "4px";
+
+    var input = document.getElementById(inputId);
+    input.parentElement.parentElement.appendChild(span);
+
+    return span;
+}
+
+function validarInput(inputId) {
+    var input = document.getElementById(inputId);
+    var valor = input.value.trim();
+    var mensaje = crearMensajeError(inputId);
+
+    // Vacío
+    if (valor === "") {
+        mensaje.textContent = "Este campo no puede estar vacío.";
+        return false;
+    }
+
+    // Solo números (permite decimales)
+    if (!/^\d+(\.\d+)?$/.test(valor)) {
+        mensaje.textContent = "Solo se permiten números.";
+        return false;
+    }
+
+    // Máximo 5 dígitos en la parte entera
+    var parteEntera = valor.split(".")[0];
+    if (parteEntera.length > 5) {
+        mensaje.textContent = "Máximo 5 dígitos permitidos.";
+        return false;
+    }
+
+    // Sin errores
+    mensaje.textContent = "";
+    return true;
+}
+
+// Aplicar onblur a cada input con su id existente
+var inputsAValidar = [
+    "txtIngresos",
+    "txtArriendo",
+    "txtAlimentacion",
+    "txtVarios",
+    "txtMonto",
+    "txtPlazo",
+    "txtTasaInteres"
+];
+
+inputsAValidar.forEach(function(id) {
+    document.getElementById(id).addEventListener("blur", function() {
+        validarInput(id);
+    });
+});
